@@ -3,10 +3,16 @@ spring:
     name: JsonView
 
   datasource:
-    url: jdbc:postgresql://localhost:5435/book_db
+    url: jdbc:postgresql://localhost:5432/book_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+    enabled: true
+    default-schema: public
+    liquibase-schema: public
 
   jpa:
     hibernate:
@@ -22,3 +28,11 @@ logging:
     ru.itk.jsonview: DEBUG
     org.springframework.web: INFO
     org.hibernate: ERROR
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
