@@ -15,33 +15,33 @@ import ru.itk.mvclibrary.service.BookService;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/book")
+@RequestMapping("/api/v1/books")
 @RequiredArgsConstructor
 public class BookController {
 
     private final BookService service;
 
-    @PostMapping("/createBook")
+    @PostMapping
     public BookDto createBook(@RequestBody CreateBookRequest request) throws AuthorException {
         return service.createBook(request);
     }
 
-    @GetMapping("/books")
+    @GetMapping("/pageBooks")
     public Page<BookDto> getAllBooks(@ParameterObject Pageable pageable) {
         return service.getAllBooks(pageable);
     }
 
-    @GetMapping("/book/{id}")
+    @GetMapping("/{id}")
     public BookDto getBook(@PathVariable UUID id) throws BookException {
         return service.getBook(id);
     }
 
-    @PutMapping("/updateBook/{id}")
+    @PutMapping("/{id}")
     public BookDto updateBook(@PathVariable UUID id, @RequestBody UpdateBookRequest request) throws BookException{
         return service.updateBook(id, request);
     }
 
-    @DeleteMapping("/deleteBook/{id}")
+    @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable UUID id) throws BookException{
         service.deleteBook(id);
     }
